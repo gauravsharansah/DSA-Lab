@@ -2,7 +2,6 @@
 #include <string.h>
 #include <math.h>
 
-/* ── float stack (replaces the broken char stack) ── */
 float operandStack[50];
 int stackTop = -1;
 
@@ -25,15 +24,14 @@ void eval(char a[50]) {
     int i;
 
     for (i = 0; a[i] != '\0'; i++) {
-        /* skip spaces between tokens */
         if (a[i] == ' ')
             continue;
 
         if (a[i] == '+' || a[i] == '-' ||
             a[i] == '*' || a[i] == '/' || a[i] == '^') {
 
-            num2 = pop();   /* right operand is on top */
-            num1 = pop();   /* left  operand is below  */
+            num2 = pop(); 
+            num1 = pop();  
 
             if      (a[i] == '+') result = num1 + num2;
             else if (a[i] == '-') result = num1 - num2;
@@ -44,9 +42,8 @@ void eval(char a[50]) {
             push(result);
 
         } else if (a[i] >= '0' && a[i] <= '9') {
-            push((float)(a[i] - '0'));   /* single-digit operand */
+            push((float)(a[i] - '0'));   
         }
-        /* non-digit, non-operator characters are ignored */
     }
 
     printf("%f\n", pop());
