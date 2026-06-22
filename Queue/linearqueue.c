@@ -1,62 +1,47 @@
 #include <stdio.h>
 #define MAX 10
 
-int front = -1;
-int rear  = -1;
+int front = 0;  
+int rear  = -1; 
 int queue[MAX];
 
-int isFull();
-int isEmpty();
-void enQueue(int b);
+void enQueue(int item);
 void deQueue();
 
 int main() {
     int i;
-    for (i = 0; i < 11; i++) {
+
+    for (i = 0; i < 11; i++)
         enQueue(i);
-    }
 
-    for (i = 0; i < 11; i++) {
+    for (i = 0; i < 11; i++)
         deQueue();
-    }
+    
+    enQueue(i); // Linear Queue Problem
 
-    return 0;
+    return 0; 
 }
 
-int isFull() {
-    if (rear == MAX - 1) {
-        printf("Queue is Full\n");
-        return 1;
-    }
-    return 0;
-}
+void enQueue(int item) {
+    if (rear >= MAX - 1)                     
+        printf("Queue Overflow\n");  
 
-int isEmpty() {
-    if (front == -1 || front > rear) {
-        printf("Queue is Empty\n");
-        return 1;
+    else
+    {
+        rear = rear + 1;                    
+        queue[rear] = item;                     
+        printf("%d inserted at position %d\n", item, rear);
     }
-    return 0;
-}
-
-void enQueue(int b) {
-    if (isFull())
-        return;
-    if (front == -1)  
-        front = 0;
-    queue[++rear] = b;
-    printf("%d inserted at position %d\n", b, rear);
 }
 
 void deQueue() {
-    int b;
-    if (isEmpty())
-        return;
-    b = queue[front++];
-    printf("%d removed from queue\n", b);
-
-    if (front > rear) {
-        front = -1;
-        rear  = -1;
+    int item;
+    if (rear < front)                     
+        printf("Queue is Empty\n");           
+    
+    else 
+    {
+        item = queue[front++];                   
+        printf("%d as deleted element\n", item);  
     }
 }
