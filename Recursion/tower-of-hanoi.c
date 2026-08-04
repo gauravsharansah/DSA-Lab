@@ -15,6 +15,8 @@ void move(int n,char s, char a, char d)
         printf("\nMove Disk1 from rod %c to rod %c",s,d);
         return;
     }
+    if(n==0)
+        return;
     move(n-1,s,d,a);
     printf("\nMove Disk%d from rod %c to rod %c",n,s,d);
     move(n-1,a,s,d);
